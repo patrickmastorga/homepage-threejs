@@ -154,6 +154,25 @@ function updateMovement(delta) {
     star.vtheta += 2 * Math.random() - 1;
     star.vy += 2 * Math.random() - 1;
 
+    if (star.r < R_RANGE[0]) {
+      star.vr = Math.abs(star.vr);
+    }
+    if (star.r > R_RANGE[1]) {
+      star.vr = -Math.abs(star.vr);
+    }
+    if (star.theta < THETA_RANGE[0]) {
+      star.vtheta = Math.abs(star.vtheta);
+    }
+    if (star.theta > THETA_RANGE[1]) {
+      star.vtheta = -Math.abs(star.vtheta);
+    }
+    if (star.y < Y_RANGE[0]) {
+      star.vy = Math.abs(star.vy);
+    }
+    if (star.y > Y_RANGE[1]) {
+      star.vy = -Math.abs(star.vy);
+    }
+
     if (Math.abs(star.vr) > SPEED_LIMIT) { star.vr = SPEED_LIMIT * Math.sign(star.vr) }
     if (Math.abs(star.vtheta) > SPEED_LIMIT) { star.vtheta = SPEED_LIMIT * Math.sign(star.vtheta) }
     if (Math.abs(star.vy) > SPEED_LIMIT) { star.vy = SPEED_LIMIT * Math.sign(star.vy) }
@@ -161,19 +180,6 @@ function updateMovement(delta) {
     star.r += star.vr * SPEED * delta;
     star.theta += star.vtheta * SPEED / star.r * delta;
     star.y += star.vy * SPEED * delta;
-
-    if (star.r < R_RANGE[0] || star.r > R_RANGE[1]) {
-      star.r -= star.vr * 2 * SPEED * delta;
-      star.vr *= -1;
-    }
-    if (star.theta < THETA_RANGE[0] || star.theta > THETA_RANGE[1]) {
-      star.theta -= star.vtheta * 2 * SPEED / star.r * delta;
-      star.vtheta *= -1;
-    }
-    if (star.y < Y_RANGE[0] || star.y > Y_RANGE[1]) {
-      star.y -= star.vy * 2 * SPEED * delta;
-      star.vy *= -1;
-    }
 
     star.position.set(star.r * Math.sin(star.theta), star.y, -star.r * Math.cos(star.theta));
   });
