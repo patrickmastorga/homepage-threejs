@@ -10,7 +10,7 @@ const scene = new THREE.Scene();
 const FOV = 75
 const camera = new THREE.PerspectiveCamera(FOV, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const canvas = document.querySelector('#c');
+const canvas = document.querySelector('#background');
 const renderer = new THREE.WebGLRenderer({ canvas });
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -39,8 +39,8 @@ scene.add(pointLight, ambientLight);
 
 //content
 
-const PATRICK_TEXTURE = new THREE.TextureLoader().load('images/patrick.jpg');
-const HANDSOME_TEXTURES = [new THREE.TextureLoader().load('images/THE-BEST-BUZZCARD-PHOTO.jpg'), new THREE.TextureLoader().load('images/THE-WORST-BUZZCARD-PHOTO.jpg')];
+const PATRICK_TEXTURE = new THREE.TextureLoader().load('../assets/images/patrick.jpg');
+const HANDSOME_TEXTURES = [new THREE.TextureLoader().load('../assets/images/THE-BEST-BUZZCARD-PHOTO.jpg'), new THREE.TextureLoader().load('../assets/images/THE-WORST-BUZZCARD-PHOTO.jpg')];
 
 const R_RANGE = [2, 100];
 const THETA_RANGE = [-Math.PI / 2, Math.PI / 2];
@@ -55,7 +55,7 @@ function addPatrick(element, index) {
   // Create the 3d object with patrick.jpg skin
   const geometry = new THREE.SphereGeometry(1, 24, 24);
   //const material = new THREE.MeshStandardMaterial({ map: PATRICK_TEXTURE });
-  const material = new THREE.MeshStandardMaterial({ map: HANDSOME_TEXTURES[index % 2] });
+  const material = new THREE.MeshStandardMaterial({ map: PATRICK_TEXTURE });
   const patrick = new THREE.Mesh(geometry, material);
 
   // Generate the position of the object (cylindrical coordinates)
@@ -125,9 +125,9 @@ function addObject(materialSource, objectSource, x, y, z, scale, rotate) {
   );
 }
 
-addObject('models/o-letter.mtl', 'models/o-letter.obj', -30, 0, -50, 250, true);
-addObject('models/s-letter.mtl', 'models/s-letter.obj', 0, 0, -50, 250, true);
-addObject('models/i-letter.mtl', 'models/i-letter.obj', 30, 0, -50, 250, true);
+addObject('../assets/models/o-letter.mtl', '../assets/models/o-letter.obj', -30, 0, -50, 250, true);
+addObject('../assets/models/s-letter.mtl', '../assets/models/s-letter.obj', 0, 0, -50, 250, true);
+addObject('../assets/models/i-letter.mtl', '../assets/models/i-letter.obj', 30, 0, -50, 250, true);
 
 // Background
 
